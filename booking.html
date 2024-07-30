@@ -52,6 +52,17 @@
         .btn:hover {
             background-color: #218838;
         }
+        .vacation{
+        	font-family: Arial, sans-serif;
+        	background-color: whitesmoke;
+        	width: 200px;
+        	height: 33px;
+        	text-align: center;
+        	color: 	#000000;
+        	font-size: 20px;
+        	padding: 1px;
+         }
+         
     </style>
 </head>
 <body>
@@ -70,9 +81,27 @@
             <div class="form-group">
                 <label for="otp">OTP</label>
                 <input type="text" id="otp" name="otp" required>
-            </div>
+             </div>
+             <div class="form-group">
+             	<h4> Select Your Vacation </h4>
+             	<select class="vacation" id="vacation" onchange="updatePaymentPlaceholder()">
+             		<b>
+             		<option>   </option>
+             		<option>  Paris  </option>
+             		<option>  Goa    </option>
+             		<option>  Kerala </option>
+             		<option>  Mysore </option>
+             		<option>  Munnar </option>
+             		<option>  Ladakh </option></b>
+             	</select>
+              </div>
+              <div class="form-group">
+              	<label for="Payment">PAYMENT</label>
+              	<input type="number" name="Payment" class="Payment" placeholder="&#8377 Enter Amount" id="payment" required>
+             </div>
+             <button type="button" class="btn" onclick="displayPaymentAlert()">Confirm Payment</button>
             <button type="button" class="btn" onclick="verifyBooking()">Submit</button>
-            <a href="index.html"><button type="button" class="btn">Back To Home Page</button></a>
+            <a href="project1.html"><button type="button" class="btn">Back To Home Page</button></a>
         </form>
     </div>
 
@@ -95,6 +124,28 @@
         			window.alert("Mobile Number Must Be 10 Digits Only.");
         		}
         	
+        }
+        function displayPaymentAlert() {
+            var vacation = document.getElementById("vacation").value;
+            var paymentAmount= parseFloat(document.getElementById("payment").value);
+            var amounts = {
+                "Paris": 50000,
+                "Goa": 35000,
+                "Kerala": 30000,
+                "Mysore": 25000,
+                "Munnar": 40000,
+                "Ladakh": 55000,
+            };
+
+            if (amounts[vacation]) {
+                if (paymentAmount === amounts[vacation]) {
+                    alert("Payment Success");
+                } else {
+                    alert("The required amount for " + vacation + " is ₹" + amounts[vacation]);
+                }
+            } else {
+                alert("Please select a valid destination.");
+            }
         }
     </script>
 </body>
